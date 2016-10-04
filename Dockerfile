@@ -30,7 +30,7 @@ RUN apk --no-cache upgrade && \
     git clone --depth 1 https://github.com/CouchPotato/CouchPotatoServer/ /opt/couchpotato && \
     apk del --no-cache --purge \
       build-deps  && \
-    rm -rf /opt/sickrage/.git* \
+    rm -rf /opt/couchpotato/.git* \
            /tmp/* \
            /var/cache/apk/*  \
            /var/tmp/*
@@ -43,6 +43,7 @@ EXPOSE 5050
 
 ### Running User: not used, managed by docker-entrypoint.sh
 #USER couchpotato
+WORKDIR /opt/couchpotato
 
 ### Start CouchPotato
 COPY ./docker-entrypoint.sh /
