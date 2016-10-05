@@ -49,7 +49,7 @@ ConfigureUser
 if [ "$1" = 'couchpotato' ]; then
     /bin/chown -R "${MYUSER}":"${MYUSER}" /config /opt/couchpotato
     /bin/chmod -R g+w /config /opt/couchpotato
-    exec /sbin/su-exec "${MYUSER}" /usr/bin/python /opt/couchpotato/CouchPotato.py --nolaunch --datadir=/config/ --config=/config/config.ini 
+    exec /sbin/su-exec "${MYUSER}" /usr/bin/python /opt/couchpotato/CouchPotato.py --consolelog --data_dir=/config/ --config_file=/config/config.ini
 fi
 
 exec "$@"
