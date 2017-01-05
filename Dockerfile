@@ -14,8 +14,8 @@ RUN apk --no-cache upgrade && \
       gcc \
       g++ \
       python-dev \
-      py-pip \
-      openssl-dev \
+      py2-pip \
+      libressl-dev \
       libffi-dev && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
