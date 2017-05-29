@@ -20,7 +20,6 @@ RUN apk --no-cache upgrade && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
       python \ 
-      libressl \
       py-libxml2 \
       py2-lxml \
       py2-openssl \
