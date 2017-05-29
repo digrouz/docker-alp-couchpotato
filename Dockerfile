@@ -21,7 +21,7 @@ RUN apk --no-cache upgrade && \
       ca-certificates \
       python \ 
       py-libxml2 \
-      py2-lxml \
+      py-lxml \
       py2-openssl \
       unrar  \
       su-exec \
