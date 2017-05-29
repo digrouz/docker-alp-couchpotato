@@ -15,7 +15,6 @@ RUN apk --no-cache upgrade && \
       g++ \
       python-dev \
       py2-pip \
-      linux-headers \
       libressl-dev \
       libffi-dev && \
     apk add --no-cache --virtual=run-deps \
@@ -23,11 +22,10 @@ RUN apk --no-cache upgrade && \
       python \ 
       py-libxml2 \
       py-lxml \
+      py2-openssl \
       unrar  \
       su-exec \
       git && \
-    pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl && \
     git clone --depth 1 https://github.com/CouchPotato/CouchPotatoServer/ /opt/couchpotato && \
     apk del --no-cache --purge \
       build-deps  && \
