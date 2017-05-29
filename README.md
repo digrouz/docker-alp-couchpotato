@@ -32,4 +32,8 @@ This variable is not mandatory and specifies the user id that will be set to run
 
 This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10009`.
 
+## Notes
+
+* The docker entrypoint will upgrade operating system at each startup.
+
 
