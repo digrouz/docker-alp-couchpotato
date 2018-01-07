@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:3.6
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ### Environment variables
@@ -15,7 +15,8 @@ RUN apk --no-cache upgrade && \
       python-dev \
       py2-pip \
       libressl-dev \
-      libffi-dev && \
+      libffi-dev \
+    && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
       python \ 
@@ -23,7 +24,9 @@ RUN apk --no-cache upgrade && \
       py-lxml \
       unrar  \
       su-exec \
-      git && \
+      git \
+      bash \
+    && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl && \
     git clone --depth 1 https://github.com/CouchPotato/CouchPotatoServer/ /opt/couchpotato && \

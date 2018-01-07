@@ -1,5 +1,5 @@
 # docker-alp-couchpotato
-Install Couchpotato into an Alpine Linux container
+Install Couchpotato into a Linux container
 
 
 ![couchpotato](https://couchpota.to/media/images/full.png)
@@ -18,6 +18,7 @@ https://couchpota.to/
       -v <path to movies library>:/movies \
       -e DOCKUID=<UID default:10009> \
       -e DOCKGID=<GID default:10009> \
+      -e DOCKUPGRADE=<0|1> \
       -p 5050:5050 digrouz/docker-alp-couchpotato
 
 ## Environment Variables
@@ -32,8 +33,14 @@ This variable is not mandatory and specifies the user id that will be set to run
 
 This variable is not mandatory and specifies the group id that will be set to run the application. It has default value `10009`.
 
+### `DOCKUPGRADE`
+
+This variable is not mandatory and specifies if the container has to launch software update at startup or not. Valid values are `0` and `1`. It has default value `0`.
+
 ## Notes
 
-* The docker entrypoint will upgrade operating system at each startup.
+* The docker entrypoint can upgrade operating system at each startup. To enable this feature, just add `-e DOCKUPGRADE=1` at container creation.
 
+## Issues
 
+If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-sickrage/issues)
