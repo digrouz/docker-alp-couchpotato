@@ -45,7 +45,6 @@ EXPOSE 5050
 
 ### Running User: not used, managed by docker-entrypoint.sh
 #USER couchpotato
-WORKDIR /opt/couchpotato
 
 ### Start CouchPotato
 COPY ./docker-entrypoint.sh /
