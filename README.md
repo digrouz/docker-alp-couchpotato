@@ -26,7 +26,7 @@ https://couchpota.to/
       -e DOCKUID=<UID default:10009> \
       -e DOCKGID=<GID default:10009> \
       -e DOCKUPGRADE=<0|1> \
-      -p 5050:5050 digrouz/docker-alp-couchpotato
+      -p 5050:5050 digrouz/couchpotato
 
 ## Environment Variables
 
