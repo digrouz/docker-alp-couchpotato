@@ -1,8 +1,15 @@
-# docker-alp-couchpotato
+# docker-couchpotato
 Install Couchpotato into a Linux container
 
 
 ![couchpotato](https://couchpota.to/media/images/full.png)
+
+## Tags
+Several tags are available:
+* latest: see alpine3.6
+* centos7: [centos7/Dokerfile](https://github.com/digrouz/docker-couchpotato/blob/centos7/Dockerfile)
+* alpine3.6: [alpine3.6/Dockerfile](https://github.com/digrouz/docker-couchpotato/blob/alpine3.6/Dockerfile)
+
 
 ## Description
 
@@ -43,4 +50,4 @@ This variable is not mandatory and specifies if the container has to launch soft
 
 ## Issues
 
-If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-alp-couchpotato/issues)
+If you encounter an issue please open a ticket at [github](https://github.com/digrouz/docker-couchpotato/issues)
