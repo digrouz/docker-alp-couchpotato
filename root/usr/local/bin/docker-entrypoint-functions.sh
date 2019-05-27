@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
-MYUSER="couchpotato"
-MYGID="10009"
-MYUID="10009"
-OS=""
-MYUPGRADE="0"
+MYUSER="dockuser"
+MYGID="100000"
+MYUID="100000"
 
-DectectOS(){
+DetectOS(){
   if [ -e /etc/alpine-release ]; then
     OS="alpine"
   elif [ -e /etc/os-release ]; then
@@ -17,14 +15,18 @@ DectectOS(){
       OS="centos"
     fi
   fi
+  echo $OS
 }
 
 AutoUpgrade(){
+  local OS=$(DetectOS)
+  local MYUPGRADE=0
   if [ "$(id -u)" = '0' ]; then
     if [ -n "${DOCKUPGRADE}" ]; then
       MYUPGRADE="${DOCKUPGRADE}"
     fi
     if [ "${MYUPGRADE}" == 1 ]; then
+      DockLog "AutoUpgrade is enabled."
       if [ "${OS}" == "alpine" ]; then
         apk --no-cache upgrade
         rm -rf /var/cache/apk/*
@@ -41,6 +43,8 @@ AutoUpgrade(){
         yum clean all
         rm -rf /var/cache/yum/*
       fi
+    else
+      DockLog "AutoUpgrade is not enabled."
     fi
   fi
 }
@@ -68,6 +72,7 @@ file_env() {
 }
 
 ConfigureUser () {
+  local OS=$(DetectOS)
   if [ "$(id -u)" = '0' ]; then
     # Managing user
     if [ -n "${DOCKUID}" ]; then
@@ -149,24 +154,44 @@ ConfigureUser () {
 }
 
 DockLog(){
+  local OS=$(DetectOS)
+  local date=$(date)
   if [ "${OS}" == "centos" ] || [ "${OS}" == "alpine" ]; then
-    echo "${1}"
+    echo "[${date}] ${1}"
   else
-    logger "${1}"
+    logger "[${date}] ${1}"
   fi
 }
 
-DectectOS
-AutoUpgrade
-ConfigureUser
+RunDropletEntrypoint(){
+  local OS=$(DetectOS)
+  if [ $(find /docker-entrypoint.d -name "*.sh" | wc -l) -gt 0 ]; then
+    DockLog "Executing all bash scripts from /docker-entrypoint.d"
+    for bashdroplet in $(ls -1 /docker-entrypoint.d/*.sh); do
+      DockLog "launching ${bashdroplet}"
+      bash ${bashdroplet}
+    done
+  fi
+  if [ $(find /docker-entrypoint.d -name "*.php" | wc -l) -gt 0 ]; then
+    DockLog "Executing all php scripts from /docker-entrypoint.d"
+    for phpdroplet in $(ls -1 /docker-entrypoint.d/*.php); do
+      DockLog "launching ${phpdroplet}"
+      php ${phpdroplet}
+    done
+  fi
+}
 
-if [ "$1" == 'couchpotato' ]; then
-  DockLog "Fixing permissions on /config /opt/sickrage" 
-  chown -R "${MYUSER}":"${MYUSER}" /config /opt/couchpotato
-  chmod -R g+w /config /opt/couchpotato
-  DockLog "Starting app: ${1}"
-  exec su-exec "${MYUSER}" python /opt/couchpotato/CouchPotato.py --console_log --data_dir=/config/ --config_file=/config/config.ini
-else
-  DockLog "Starting app: ${@}"
-  exec "$@"
-fi
+PrepareEnvironment(){
+  local OS=$(DetectOS)
+  if [ -f ${1} ]; then
+    grep -v "#" ${1} |
+    while IFS=\= read -r name value; do
+      if [ -n "${name}" ]; then
+        echo "export ${name}=${value}" >> /etc/profile.d/docker-$(basename ${1}).sh
+      fi
+    done
+    DockLog "Created environment file /etc/profile.d/docker-$(basename ${1}).sh"
+  else
+    DockLog "Given argument is not supported"
+  fi
+}

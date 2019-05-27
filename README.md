@@ -6,9 +6,9 @@ Install Couchpotato into a Linux container
 
 ## Tags
 Several tags are available:
-* latest: see alpine3.6
-* centos7: [centos7/Dokerfile](https://github.com/digrouz/docker-couchpotato/blob/centos7/Dockerfile)
-* alpine3.6: [alpine3.6/Dockerfile](https://github.com/digrouz/docker-couchpotato/blob/alpine3.6/Dockerfile)
+* latest: see alpine
+* centos7: [centos7/Dokerfile](https://github.com/digrouz/docker-couchpotato/blob/master/Dockerfile_centos7)
+* alpine: [alpine3.6/Dockerfile](https://github.com/digrouz/docker-couchpotato/blob/alpine3.6/Dockerfile_alpine)
 
 
 ## Description
