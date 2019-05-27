@@ -9,6 +9,9 @@ ENV LANG='en_US.UTF-8' \
     APPUID='10009' \
     APPGID='10009'
 
+# Copy config files
+COPY root/ /
+
 ### Install Application
 RUN set -x && \
     chmod 1777 /tmp && \
