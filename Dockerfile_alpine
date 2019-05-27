@@ -65,6 +65,5 @@ EXPOSE 5050
 WORKDIR /opt/couchpotato
 
 ### Start CouchPotato
-COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["couchpotato"]

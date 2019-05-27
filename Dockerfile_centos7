@@ -62,7 +62,6 @@ EXPOSE 5050
 #USER couchpotato
 
 ### Start CouchPotato
-COPY ./docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["couchpotato"]
 
