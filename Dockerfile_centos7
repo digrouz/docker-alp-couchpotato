@@ -32,7 +32,7 @@ RUN set -x && \
       openssl-devel \
       make \
      && \
-    pip --no-cache-dir install --upgrade pyopenssl cheetah && \
+    pip --no-cache-dir install --upgrade pyopenssl && \
     git clone --depth 1 https://github.com/CouchPotato/CouchPotatoServer/ /opt/couchpotato && \
     yum history -y undo last && \
     yum install -y ca-certificates \
