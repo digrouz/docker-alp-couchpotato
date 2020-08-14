@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.11
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ### Environment variables
@@ -25,6 +25,8 @@ RUN set -x && \
       make \
       gcc \
       g++ \
+      libxml2-dev \
+      libxslt-dev \
       python2-dev \
       py2-pip \
       libressl-dev \
@@ -33,15 +35,15 @@ RUN set -x && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
       python2 \ 
-      py2-libxml2 \
-      py2-lxml \
+      libxml2 \
+      libxslt \
       unrar  \
       su-exec \
       git \
       bash \
     && \
     pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl && \
+    pip --no-cache-dir install --upgrade pyopenssl lxml && \
     git clone --depth 1 https://github.com/CouchPotato/CouchPotatoServer/ /opt/couchpotato && \
     apk del --no-cache --purge \
       build-deps  \
