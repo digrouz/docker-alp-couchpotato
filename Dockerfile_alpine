@@ -25,16 +25,16 @@ RUN set -x && \
       make \
       gcc \
       g++ \
-      python-dev \
+      python2-dev \
       py2-pip \
       libressl-dev \
       libffi-dev \
     && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
-      python \ 
-      py-libxml2 \
-      py-lxml \
+      python2 \ 
+      py2-libxml2 \
+      py2-lxml \
       unrar  \
       su-exec \
       git \
