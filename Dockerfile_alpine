@@ -29,7 +29,7 @@ RUN set -x && \
       libxslt-dev \
       python2-dev \
       py2-pip \
-      libressl-dev \
+      openssl-dev \
       libffi-dev \
     && \
     apk add --no-cache --virtual=run-deps \
@@ -37,6 +37,7 @@ RUN set -x && \
       python2 \ 
       libxml2 \
       libxslt \
+      openssl \
       unrar  \
       su-exec \
       git \
